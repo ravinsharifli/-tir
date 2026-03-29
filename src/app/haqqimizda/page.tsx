@@ -2,14 +2,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Haqqımızda',
-  description: 'Parfumer — Bakıda ilk lüks qramla ətir mağazası. Bizim hekayəmiz.',
+  description: 'Parfumer — Bakıda ilk lüks qramla ətir mağazası. Tom Ford, Creed, Xerjoff. Bizim hekayəmiz.',
 }
 
 export default function HaqqimızdaPage() {
   return (
     <div style={{ paddingTop: '120px', minHeight: '100vh', background: 'var(--black)' }}>
-      {/* Header */}
-      <div style={{ padding: '80px 60px 80px', maxWidth: '800px' }}>
+      <div style={{ padding: '80px 60px', maxWidth: '800px' }}>
         <span style={{ fontSize: '10px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--gold)', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
           <span style={{ display: 'block', width: '40px', height: '0.5px', background: 'var(--gold)' }} />
           Bizim hekayəmiz
@@ -28,7 +27,6 @@ export default function HaqqimızdaPage() {
         </p>
       </div>
 
-      {/* Stats */}
       <div style={{ borderTop: '0.5px solid var(--border)', borderBottom: '0.5px solid var(--border)', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
         {[
           { num: '100+', label: 'Lüks ətir' },
@@ -42,7 +40,6 @@ export default function HaqqimızdaPage() {
         ))}
       </div>
 
-      {/* Xeyriyyə */}
       <div id="xeyriyye" style={{ padding: '100px 60px', maxWidth: '800px' }}>
         <span style={{ fontSize: '10px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--gold)', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
           <span style={{ display: 'block', width: '40px', height: '0.5px', background: 'var(--gold)' }} />

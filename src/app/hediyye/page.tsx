@@ -2,7 +2,6 @@ import { client } from '@/lib/sanity'
 import { GIFT_BOXES_QUERY } from '@/lib/queries'
 import { GiftBox } from '@/lib/types'
 import type { Metadata } from 'next'
-import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Hədiyyə Qutuları',
@@ -14,7 +13,6 @@ export default async function HediyyePage() {
 
   return (
     <div style={{ paddingTop: '120px', minHeight: '100vh', background: 'var(--black)' }}>
-      {/* Header */}
       <div style={{ padding: '80px 60px 60px' }}>
         <span style={{ fontSize: '10px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--gold)', display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
           <span style={{ display: 'block', width: '40px', height: '0.5px', background: 'var(--gold)' }} />
@@ -26,7 +24,6 @@ export default async function HediyyePage() {
         <p style={{ fontSize: '13px', color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Xüsusi anlar üçün</p>
       </div>
 
-      {/* Grid */}
       <div style={{ padding: '0 60px 120px' }}>
         {giftBoxes.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '120px 0' }}>

@@ -22,12 +22,19 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://parfumer.az'),
+  metadataBase: new URL('https://tir-six.vercel.app'),
   title: {
     default: 'Parfumer — Lüks Ətir Mağazası | Bakı',
     template: '%s | Parfumer',
   },
   description: 'Bakıda ən lüks qramla ətir mağazası. Tom Ford, Creed, Xerjoff və daha çox premium brendlər. 15ml-dən başlayan sifarişlər.',
+  keywords: ['ətir', 'parfüm', 'lüks ətir', 'Bakı ətir', 'Tom Ford', 'Creed', 'Xerjoff', 'qramla ətir'],
+  openGraph: {
+    title: 'Parfumer — Lüks Ətir Mağazası | Bakı',
+    description: 'Bakıda ən lüks qramla ətir mağazası. 15ml-dən başlayan sifarişlər.',
+    locale: 'az_AZ',
+    type: 'website',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

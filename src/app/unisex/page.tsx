@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 
 export default async function UnisexPage() {
   const perfumes: Perfume[] = await client.fetch(PERFUMES_BY_GENDER_QUERY, { gender: 'unisex' })
-
   return (
     <PerfumeGrid
       perfumes={perfumes}
