@@ -5,17 +5,17 @@ export default function HomeClient() {
   return (
     <>
       {/* HERO */}
-      <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', padding: '0 60px' }}>
+      <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', padding: '0 60px' }} className="hero-section">
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 60% 80% at 75% 50%, rgba(201,169,110,0.06) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,169,110,0.04) 0%, transparent 60%)' }} />
         <div style={{ position: 'absolute', inset: 0, opacity: 0.03, backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 80px, var(--gold) 80px, var(--gold) 80.5px)' }} />
 
-        <div style={{ position: 'relative', maxWidth: '640px' }}>
+        <div style={{ position: 'relative', maxWidth: '640px', zIndex: 2 }}>
           <div className="animate-fadeUp" style={{ animationDelay: '0.3s', opacity: 0, fontSize: '10px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '28px', display: 'flex', alignItems: 'center', gap: '16px' }}>
             <span style={{ display: 'block', width: '40px', height: '0.5px', background: 'var(--gold)' }} />
             Lüks Ətir Mağazası · Bakı
           </div>
 
-          <h1 className="animate-fadeUp" style={{ animationDelay: '0.5s', opacity: 0, fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: 'clamp(56px, 7vw, 96px)', fontWeight: 300, lineHeight: 1.0, marginBottom: '32px' }}>
+          <h1 className="animate-fadeUp" style={{ animationDelay: '0.5s', opacity: 0, fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: 'clamp(48px, 7vw, 96px)', fontWeight: 300, lineHeight: 1.0, marginBottom: '32px' }}>
             Ətirin<br />
             <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>ilə hekayə</em><br />
             yaz.
@@ -25,7 +25,7 @@ export default function HomeClient() {
             Dünyanın ən seçkin evlərindən gətirilən ətirlər — 15ml-dən başlayan sifarişlərlə. Öz imzanı tap, hər gün fərqli bir hekayə yaşat.
           </p>
 
-          <div className="animate-fadeUp" style={{ animationDelay: '0.9s', opacity: 0, display: 'flex', gap: '28px', alignItems: 'center' }}>
+          <div className="animate-fadeUp" style={{ animationDelay: '0.9s', opacity: 0, display: 'flex', gap: '28px', alignItems: 'center', flexWrap: 'wrap' }}>
             <Link href="/kisi" className="btn-gold">Kolleksiyaya Bax</Link>
             <Link href="/haqqimizda" className="btn-ghost">
               Haqqımızda
@@ -34,8 +34,8 @@ export default function HomeClient() {
           </div>
         </div>
 
-        {/* Hero bottle */}
-        <div className="animate-float" style={{ position: 'absolute', right: '8%', top: '50%', transform: 'translateY(-50%)' }}>
+        {/* Hero bottle — yalnız desktop */}
+        <div className="hero-bottle animate-float" style={{ position: 'absolute', right: '8%', top: '50%', transform: 'translateY(-50%)', zIndex: 1 }}>
           <div style={{ position: 'relative' }}>
             <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(201,169,110,0.1) 0%, transparent 70%)' }} />
             <svg width="200" height="340" viewBox="0 0 200 340" fill="none">
@@ -75,7 +75,7 @@ export default function HomeClient() {
       </div>
 
       {/* CATEGORIES */}
-      <section style={{ padding: '120px 60px', background: 'var(--deep)' }}>
+      <section style={{ padding: '120px 60px', background: 'var(--deep)' }} className="section-pad">
         <div style={{ marginBottom: '64px' }}>
           <span className="section-tag">Kateqoriyalar</span>
           <h2 style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: 'clamp(36px, 4vw, 52px)', fontWeight: 300, lineHeight: 1.1 }}>
@@ -83,7 +83,7 @@ export default function HomeClient() {
           </h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '2px' }}>
+        <div className="cat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '2px' }}>
           {[
             { href: '/kisi', label: 'Kişi', count: '40+ ətir', desc: 'Güclü, dərin, yaddaqalan', color: 'rgba(201,169,110,0.04)' },
             { href: '/xanim', label: 'Xanım', count: '45+ ətir', desc: 'Zərif, çiçəkli, füsunkar', color: 'rgba(201,169,110,0.03)' },
@@ -104,9 +104,9 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* PACKAGING UPSELL */}
-      <section style={{ padding: '120px 60px', background: 'var(--black)' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px', alignItems: 'stretch' }}>
+      {/* PACKAGING */}
+      <section style={{ padding: '120px 60px', background: 'var(--black)' }} className="section-pad">
+        <div className="pkg-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px', alignItems: 'stretch' }}>
           <div style={{ background: 'var(--surface)', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '520px', position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, rgba(201,169,110,0.08) 0%, transparent 70%)' }} />
             <svg className="animate-float" width="160" height="280" viewBox="0 0 160 280" fill="none">
@@ -120,7 +120,7 @@ export default function HomeClient() {
             </svg>
           </div>
 
-          <div style={{ background: 'var(--card)', padding: '64px' }}>
+          <div style={{ background: 'var(--card)', padding: '64px' }} className="pkg-text">
             <span className="section-tag">Qablaşdırma</span>
             <h2 style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: '42px', fontWeight: 300, lineHeight: 1.1, marginBottom: '16px' }}>
               Necə<br /><em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>çatdırılsın?</em>
@@ -128,7 +128,6 @@ export default function HomeClient() {
             <p style={{ fontSize: '13px', color: 'var(--text-mid)', lineHeight: 1.8, marginBottom: '40px' }}>
               Hər sifariş zamanı qablaşdırma növünü seçə bilərsən. Hədiyyə üçün xüsusi paket — sevdiklərinə unutulmaz an yaşat.
             </p>
-
             {[
               { tier: 'Standart', price: 'Pulsuz', items: ['Şəffaf şüşə flakon', 'Sadə qutu', 'Kraft paket'], active: false },
               { tier: 'Premium', price: '+9.99 ₼', items: ['Zərli şüşə flakon', 'Hədiyyəlik qutu', 'Gözəl karton paket'], active: true },
@@ -157,15 +156,14 @@ export default function HomeClient() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section style={{ padding: '120px 60px', background: 'var(--deep)' }}>
+      <section style={{ padding: '120px 60px', background: 'var(--deep)' }} className="section-pad">
         <div style={{ marginBottom: '64px' }}>
           <span className="section-tag">Proses</span>
           <h2 style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: 'clamp(36px, 4vw, 52px)', fontWeight: 300 }}>
             Necə <em style={{ fontStyle: 'italic' }}>işləyir</em>
           </h2>
         </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', border: '0.5px solid var(--border)' }}>
+        <div className="steps-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', border: '0.5px solid var(--border)' }}>
           {[
             { num: '01', title: 'Ətrini seç', text: '100-dən çox lüks ətir arasından seçim et. Hər ətir haqqında ətraflı nota məlumatı, geyim tövsiyəsi və müştəri rəyləri mövcuddur.' },
             { num: '02', title: 'Həcmini müəyyən et', text: 'Minimum 15ml-dən başlayan sifarişlər. Yeni bir ətiri sınamaq üçün 15ml, sevdiyin üçün daha böyük həcm sifariş et.' },
@@ -182,7 +180,7 @@ export default function HomeClient() {
 
       {/* TESTIMONIALS */}
       <section style={{ padding: '100px 0', background: 'var(--surface)', overflow: 'hidden' }}>
-        <div style={{ padding: '0 60px', marginBottom: '52px' }}>
+        <div style={{ padding: '0 60px', marginBottom: '52px' }} className="section-pad-inner">
           <span className="section-tag">Müştəri Rəyləri</span>
           <h2 style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: 'clamp(36px, 4vw, 52px)', fontWeight: 300 }}>
             Onlar nə <em style={{ fontStyle: 'italic' }}>deyir</em>
@@ -217,16 +215,16 @@ export default function HomeClient() {
       </section>
 
       {/* CHARITY */}
-      <section style={{ padding: '100px 60px', background: 'var(--black)', borderTop: '0.5px solid var(--border)' }}>
+      <section style={{ padding: '100px 60px', background: 'var(--black)', borderTop: '0.5px solid var(--border)' }} className="section-pad">
         <div style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
           <span className="section-tag" style={{ justifyContent: 'center', display: 'flex' }}>Sosial Məsuliyyət</span>
           <h2 style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: 'clamp(32px, 3.5vw, 48px)', fontWeight: 300, marginBottom: '24px', lineHeight: 1.2 }}>
             Hər sifarişin <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>5%-i</em><br />xeyriyyəyə gedir
           </h2>
           <p style={{ fontSize: '14px', color: 'var(--text-mid)', lineHeight: 1.9, marginBottom: '48px' }}>
-            Küçə heyvanlarının qorunması, tələbələrin təhsil haqqının ödənilməsi və ehtiyac sahiblərinin dəstəklənməsi — gəlirimizin 5%-i bu məqsədlərə ayrılır. Sən ətir alırsan, biz birlikdə fərq yaradırıq.
+            Küçə heyvanlarının qorunması, tələbələrin təhsil haqqının ödənilməsi və ehtiyac sahiblərinin dəstəklənməsi — gəlirimizin 5%-i bu məqsədlərə ayrılır.
           </p>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '40px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', flexWrap: 'wrap' }}>
             {['🐾 Küçə Heyvanları', '📚 Tələbə Təhsili', '🤝 Ehtiyac Sahibləri'].map((item) => (
               <div key={item} style={{ fontSize: '13px', color: 'var(--text-muted)', letterSpacing: '0.04em' }}>{item}</div>
             ))}
@@ -235,13 +233,13 @@ export default function HomeClient() {
       </section>
 
       {/* NEWSLETTER */}
-      <section style={{ padding: '100px 60px', background: 'var(--deep)', borderTop: '0.5px solid var(--border)', textAlign: 'center' }}>
+      <section style={{ padding: '100px 60px', background: 'var(--deep)', borderTop: '0.5px solid var(--border)', textAlign: 'center' }} className="section-pad">
         <span className="section-tag" style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>Xəbərdar ol</span>
         <h2 style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 300, marginBottom: '16px' }}>
           Yeni ətirlər <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>sənə çatsın</em>
         </h2>
         <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '44px', letterSpacing: '0.04em' }}>
-          Hər həftə yeni kolleksiyalar, eksklüziv endirimlər və ətir hekayələri.
+          Hər həftə yeni kolleksiyalar, eksklyuziv endirimlər və ətir hekayələri.
         </p>
         <div style={{ display: 'flex', maxWidth: '480px', margin: '0 auto', border: '0.5px solid var(--border)' }}>
           <input type="email" placeholder="E-poçt ünvanın" className="input-luxury" style={{ border: 'none', borderRadius: 0 }} />
@@ -250,8 +248,8 @@ export default function HomeClient() {
       </section>
 
       {/* FOOTER */}
-      <footer style={{ background: 'var(--black)', borderTop: '0.5px solid var(--border)', padding: '80px 60px 40px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '60px', marginBottom: '60px' }}>
+      <footer style={{ background: 'var(--black)', borderTop: '0.5px solid var(--border)', padding: '80px 60px 40px' }} className="footer-pad">
+        <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '60px', marginBottom: '60px' }}>
           <div>
             <div style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: '28px', fontWeight: 300, letterSpacing: '0.1em', marginBottom: '16px' }}>
               PARFU<span style={{ color: 'var(--gold)' }}>M</span>ER
@@ -261,7 +259,7 @@ export default function HomeClient() {
             </p>
           </div>
           {[
-            { title: 'Mağaza', links: [{ href: '/kisi', label: 'Kişi Ətrləri' }, { href: '/xanim', label: 'Xanım Ətrləri' }, { href: '/unisex', label: 'Unisex' }, { href: '/hediyye', label: 'Hədiyyə Qutuları' }] },
+            { title: 'Mağaza', links: [{ href: '/kisi', label: 'Kişi Ətrirləri' }, { href: '/xanim', label: 'Xanım Ətrirləri' }, { href: '/unisex', label: 'Unisex' }, { href: '/hediyye', label: 'Hədiyyə Qutuları' }] },
             { title: 'Şirkət', links: [{ href: '/haqqimizda', label: 'Haqqımızda' }, { href: '/haqqimizda#xeyriyye', label: 'Xeyriyyə' }, { href: '#', label: 'Bloq' }, { href: '#', label: 'Əlaqə' }] },
             { title: 'Kömək', links: [{ href: '#', label: 'Çatdırılma' }, { href: '#', label: 'Qaytarma' }, { href: '#', label: 'FAQ' }, { href: '#', label: 'Gizlilik' }] },
           ].map((col) => (
@@ -281,7 +279,7 @@ export default function HomeClient() {
             </div>
           ))}
         </div>
-        <div style={{ borderTop: '0.5px solid var(--border)', paddingTop: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ borderTop: '0.5px solid var(--border)', paddingTop: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>© 2025 Parfumer. Bütün hüquqlar qorunur.</span>
           <div style={{ display: 'flex', gap: '24px' }}>
             {['Instagram', 'WhatsApp', 'TikTok'].map((s) => (

@@ -131,28 +131,7 @@ a { color: inherit; }
 }
 
 /* Cursor */
-.cursor-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--gold);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s;
-}
-.cursor-ring {
-  width: 32px;
-  height: 32px;
-  border: 0.5px solid var(--gold-dim);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: all 0.15s ease;
-}
+* { cursor: none !important; }
 
 /* Responsive — Navbar */
 .desktop-nav {
@@ -180,4 +159,17 @@ a { color: inherit; }
   div[style*="gridTemplateColumns: 'repeat(4"] {
     grid-template-columns: repeat(2, 1fr) !important;
   }
+}
+/* Hero bottle — mobilə gizlən */
+@media (max-width: 768px) {
+  .hero-bottle { display: none !important; }
+  .hero-section { padding: 0 24px !important; }
+  .section-pad { padding-left: 24px !important; padding-right: 24px !important; }
+  .cat-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .pkg-grid { grid-template-columns: 1fr !important; }
+  .pkg-text { padding: 40px 24px !important; }
+  .steps-grid { grid-template-columns: 1fr !important; }
+  .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .footer-pad { padding: 60px 24px 40px !important; }
+  .section-pad-inner { padding-left: 24px !important; padding-right: 24px !important; }
 }
