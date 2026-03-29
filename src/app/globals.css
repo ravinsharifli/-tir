@@ -140,14 +140,18 @@ a { color: inherit; }
 .mobile-nav {
   display: none;
 }
+.mobile-menu-btn {
+  display: none;
+}
 
 @media (max-width: 768px) {
   .desktop-nav {
     display: none !important;
   }
-  .mobile-nav {
+  .mobile-menu-btn {
     display: flex !important;
   }
+
 
   /* Hero mobilə uyğun */
   section {

@@ -27,23 +27,32 @@ export function Navbar() {
     <>
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        padding: scrolled ? '16px 32px' : '24px 32px',
+        padding: scrolled ? '16px 60px' : '28px 60px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         transition: 'all 0.4s',
         background: scrolled || menuOpen ? 'rgba(10,8,6,0.97)' : 'transparent',
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
         borderBottom: scrolled ? '0.5px solid var(--border)' : 'none',
       }}>
-        {/* Logo */}
-        <Link href="/" style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: '20px', fontWeight: 300, letterSpacing: '0.2em', color: 'var(--cream)', textDecoration: 'none' }}>
+        {/* Logo — heç bir subtitle yoxdur */}
+        <Link href="/" style={{
+          fontFamily: 'var(--font-cormorant), Georgia, serif',
+          fontSize: '22px', fontWeight: 300, letterSpacing: '0.2em',
+          color: 'var(--cream)', textDecoration: 'none'
+        }}>
           PARFU<span style={{ color: 'var(--gold)' }}>M</span>ER
         </Link>
 
-        {/* Desktop menu */}
-        <ul style={{ display: 'flex', gap: '32px', listStyle: 'none', margin: 0, padding: 0 }} className="desktop-nav">
+        {/* Desktop menu — yalnız böyük ekranda */}
+        <ul style={{
+          display: 'flex', gap: '36px', listStyle: 'none', margin: 0, padding: 0
+        }} className="desktop-nav">
           {links.map((l) => (
             <li key={l.href}>
-              <Link href={l.href} style={{ fontSize: '10px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-mid)', textDecoration: 'none' }}
+              <Link href={l.href} style={{
+                fontSize: '11px', letterSpacing: '0.15em',
+                textTransform: 'uppercase', color: 'var(--text-mid)', textDecoration: 'none'
+              }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--gold)')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-mid)')}>
                 {l.label}
@@ -52,9 +61,14 @@ export function Navbar() {
           ))}
         </ul>
 
-        {/* Sağ tərəf — səbət + hamburger */}
+        {/* Sağ tərəf */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <button onClick={openCart} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-mid)', background: 'none', border: 'none', cursor: 'pointer' }}
+          {/* Səbət — həmişə görünür */}
+          <button onClick={openCart} style={{
+            display: 'flex', alignItems: 'center', gap: '8px',
+            fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase',
+            color: 'var(--text-mid)', background: 'none', border: 'none', cursor: 'none'
+          }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--gold)')}
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-mid)')}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -64,40 +78,71 @@ export function Navbar() {
             </svg>
             <span className="desktop-nav">Səbət</span>
             {total > 0 && (
-              <span style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'var(--gold)', color: 'var(--black)', fontSize: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 500 }}>
+              <span style={{
+                width: '18px', height: '18px', borderRadius: '50%',
+                background: 'var(--gold)', color: 'var(--black)',
+                fontSize: '10px', display: 'flex', alignItems: 'center',
+                justifyContent: 'center', fontWeight: 500
+              }}>
                 {total}
               </span>
             )}
           </button>
 
-          {/* Hamburger düyməsi — yalnız mobil */}
+          {/* Hamburger — YALNIZ mobil */}
           <button
-            className="mobile-nav"
+            className="mobile-menu-btn"
             onClick={() => setMenuOpen(!menuOpen)}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', display: 'flex', flexDirection: 'column', gap: '5px' }}>
-            <span style={{ display: 'block', width: '22px', height: '0.5px', background: 'var(--cream)', transition: 'all 0.3s', transform: menuOpen ? 'rotate(45deg) translateY(4px)' : 'none' }} />
-            <span style={{ display: 'block', width: '22px', height: '0.5px', background: 'var(--cream)', transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
-            <span style={{ display: 'block', width: '22px', height: '0.5px', background: 'var(--cream)', transition: 'all 0.3s', transform: menuOpen ? 'rotate(-45deg) translateY(-4px)' : 'none' }} />
+            style={{
+              background: 'none', border: 'none', cursor: 'none',
+              padding: '4px', display: 'flex', flexDirection: 'column',
+              gap: '5px', alignItems: 'flex-end'
+            }}>
+            <span style={{
+              display: 'block', width: '22px', height: '0.5px',
+              background: 'var(--cream)', transition: 'all 0.3s',
+              transform: menuOpen ? 'rotate(45deg) translateY(5px)' : 'none'
+            }} />
+            <span style={{
+              display: 'block', width: '22px', height: '0.5px',
+              background: 'var(--cream)', transition: 'all 0.3s',
+              opacity: menuOpen ? 0 : 1
+            }} />
+            <span style={{
+              display: 'block', width: '22px', height: '0.5px',
+              background: 'var(--cream)', transition: 'all 0.3s',
+              transform: menuOpen ? 'rotate(-45deg) translateY(-5px)' : 'none'
+            }} />
           </button>
         </div>
       </nav>
 
-      {/* Mobil açılan menyu */}
+      {/* Mobil menyu */}
       {menuOpen && (
-        <div className="mobile-nav" style={{
-          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 99,
-          background: 'rgba(10,8,6,0.98)', display: 'flex', flexDirection: 'column',
+        <div className="mobile-menu-overlay" style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          zIndex: 99, background: 'rgba(10,8,6,0.98)',
+          display: 'flex', flexDirection: 'column',
           alignItems: 'center', justifyContent: 'center', gap: '40px'
         }}>
           {links.map((l) => (
             <Link key={l.href} href={l.href}
               onClick={() => setMenuOpen(false)}
-              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: '32px', fontWeight: 300, letterSpacing: '0.1em', color: 'var(--cream)', textDecoration: 'none' }}>
+              style={{
+                fontFamily: 'var(--font-cormorant), Georgia, serif',
+                fontSize: '36px', fontWeight: 300,
+                letterSpacing: '0.1em', color: 'var(--cream)', textDecoration: 'none'
+              }}>
               {l.label}
             </Link>
           ))}
           <button onClick={() => { openCart(); setMenuOpen(false) }}
-            style={{ marginTop: '20px', fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', background: 'none', border: '0.5px solid var(--gold)', padding: '12px 32px', cursor: 'pointer' }}>
+            style={{
+              marginTop: '20px', fontSize: '11px', letterSpacing: '0.2em',
+              textTransform: 'uppercase', color: 'var(--gold)',
+              background: 'none', border: '0.5px solid var(--gold)',
+              padding: '12px 32px', cursor: 'none'
+            }}>
             Səbət {total > 0 && `(${total})`}
           </button>
         </div>
