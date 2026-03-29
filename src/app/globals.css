@@ -135,13 +135,11 @@ a { color: inherit; }
 
 /* Responsive — Navbar */
 .desktop-nav {
-  display: flex;
+  display: flex !important;
 }
-.mobile-nav {
-  display: none;
-}
+
 .mobile-menu-btn {
-  display: none;
+  display: none !important;
 }
 
 @media (max-width: 768px) {

@@ -34,16 +34,15 @@ export function Navbar() {
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
         borderBottom: scrolled ? '0.5px solid var(--border)' : 'none',
       }}>
-        {/* Logo — heç bir subtitle yoxdur */}
+
         <Link href="/" style={{
           fontFamily: 'var(--font-cormorant), Georgia, serif',
           fontSize: '22px', fontWeight: 300, letterSpacing: '0.2em',
-          color: 'var(--cream)', textDecoration: 'none'
+          color: 'var(--cream)', textDecoration: 'none', zIndex: 1
         }}>
           PARFU<span style={{ color: 'var(--gold)' }}>M</span>ER
         </Link>
 
-        {/* Desktop menu — yalnız böyük ekranda */}
         <ul style={{
           display: 'flex', gap: '36px', listStyle: 'none', margin: 0, padding: 0
         }} className="desktop-nav">
@@ -61,9 +60,7 @@ export function Navbar() {
           ))}
         </ul>
 
-        {/* Sağ tərəf */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          {/* Səbət — həmişə görünür */}
           <button onClick={openCart} style={{
             display: 'flex', alignItems: 'center', gap: '8px',
             fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase',
@@ -89,13 +86,12 @@ export function Navbar() {
             )}
           </button>
 
-          {/* Hamburger — YALNIZ mobil */}
           <button
             className="mobile-menu-btn"
             onClick={() => setMenuOpen(!menuOpen)}
             style={{
               background: 'none', border: 'none', cursor: 'none',
-              padding: '4px', display: 'flex', flexDirection: 'column',
+              padding: '4px', flexDirection: 'column',
               gap: '5px', alignItems: 'flex-end'
             }}>
             <span style={{
@@ -117,9 +113,8 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobil menyu */}
       {menuOpen && (
-        <div className="mobile-menu-overlay" style={{
+        <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
           zIndex: 99, background: 'rgba(10,8,6,0.98)',
           display: 'flex', flexDirection: 'column',
