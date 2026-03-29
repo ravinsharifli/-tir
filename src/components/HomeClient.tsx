@@ -16,7 +16,7 @@ export default function HomeClient() {
           </div>
 
           <h1 className="animate-fadeUp" style={{ animationDelay: '0.5s', opacity: 0, fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: 'clamp(56px, 7vw, 96px)', fontWeight: 300, lineHeight: 1.0, marginBottom: '32px' }}>
-            Qoxular<br />
+            Ətirin<br />
             <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>ilə hekayə</em><br />
             yaz.
           </h1>
