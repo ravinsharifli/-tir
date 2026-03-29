@@ -38,3 +38,8 @@ export const GIFT_BOXES_QUERY = groq`
     price, includes, image
   }
 `
+export const PACKAGING_QUERY = groq`
+  *[_type == "packaging"] | order(price asc) {
+    _id, tier, price, items, popular
+  }
+`

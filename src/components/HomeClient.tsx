@@ -22,7 +22,7 @@ export default function HomeClient() {
           </h1>
 
           <p className="animate-fadeUp" style={{ animationDelay: '0.7s', opacity: 0, fontSize: '13px', lineHeight: 1.9, color: 'var(--text-mid)', maxWidth: '420px', marginBottom: '52px' }}>
-            Dünyanın ən seçkin evlərindən gətirilən ətirlər — 15ml-dən başlayan sifarişlərlə. Öz imzanı tap, hər gün fərqli bir hekayə yaşat.
+            Premium ətirlərin incə sehrində qalın. Hər qoxu, gecələrin şahzadəsi kimi cazibədar. Sifarişlə başlayın, ətirinizlə iz qoyun.
           </p>
 
           <div className="animate-fadeUp" style={{ animationDelay: '0.9s', opacity: 0, display: 'flex', gap: '28px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -167,7 +167,7 @@ export default function HomeClient() {
           {[
             { num: '01', title: 'Ətrini seç', text: '100-dən çox lüks ətir arasından seçim et. Hər ətir haqqında ətraflı nota məlumatı, geyim tövsiyəsi və müştəri rəyləri mövcuddur.' },
             { num: '02', title: 'Həcmini müəyyən et', text: 'Minimum 15ml-dən başlayan sifarişlər. Yeni bir ətiri sınamaq üçün 15ml, sevdiyin üçün daha böyük həcm sifariş et.' },
-            { num: '03', title: 'Qapına çatdırılır', text: 'Sifarişin zərif qara qutuda, Parfumer möhürü ilə paketlənir. Bakı daxilində 1-3 gün, bölgələrə 2-3 iş günü ərzində.' },
+            { num: '03', title: 'Qapına çatdırılır', text: 'Sifarişin seçdiyin qablaşdırma ilə zərifcə hazırlanır. Bütün Azərbaycana ödənişsiz çatdırılır.' },
           ].map((step, i) => (
             <div key={i} style={{ padding: '52px 44px', borderRight: i < 2 ? '0.5px solid var(--border)' : 'none' }}>
               <span style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: '80px', fontWeight: 300, color: 'rgba(201,169,110,0.08)', lineHeight: 1, display: 'block', marginBottom: '-16px' }}>{step.num}</span>
@@ -232,21 +232,7 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* NEWSLETTER */}
-      <section style={{ padding: '100px 60px', background: 'var(--deep)', borderTop: '0.5px solid var(--border)', textAlign: 'center' }} className="section-pad">
-        <span className="section-tag" style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>Xəbərdar ol</span>
-        <h2 style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 300, marginBottom: '16px' }}>
-          Yeni ətirlər <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>sənə çatsın</em>
-        </h2>
-        <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '44px', letterSpacing: '0.04em' }}>
-          Hər həftə yeni kolleksiyalar, eksklyuziv endirimlər və ətir hekayələri.
-        </p>
-        <div style={{ display: 'flex', maxWidth: '480px', margin: '0 auto', border: '0.5px solid var(--border)' }}>
-          <input type="email" placeholder="E-poçt ünvanın" className="input-luxury" style={{ border: 'none', borderRadius: 0 }} />
-          <button className="btn-gold" style={{ whiteSpace: 'nowrap', padding: '16px 32px' }}>Qoşul</button>
-        </div>
-      </section>
-
+      
       {/* FOOTER */}
       <footer style={{ background: 'var(--black)', borderTop: '0.5px solid var(--border)', padding: '80px 60px 40px' }} className="footer-pad">
         <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '60px', marginBottom: '60px' }}>
