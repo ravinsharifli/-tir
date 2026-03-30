@@ -5,14 +5,14 @@ export default function HomeClient() {
   return (
     <>
       {/* HERO */}
-      <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', padding: '0 60px' }} className="hero-section">
+      <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', padding: '120px 60px 0' }} className="hero-section">
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 60% 80% at 75% 50%, rgba(201,169,110,0.06) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,169,110,0.04) 0%, transparent 60%)' }} />
         <div style={{ position: 'absolute', inset: 0, opacity: 0.03, backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 80px, var(--gold) 80px, var(--gold) 80.5px)' }} />
 
         <div style={{ position: 'relative', maxWidth: '640px', zIndex: 2 }}>
           <div className="animate-fadeUp" style={{ animationDelay: '0.3s', opacity: 0, fontSize: '10px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '28px', display: 'flex', alignItems: 'center', gap: '16px' }}>
             <span style={{ display: 'block', width: '40px', height: '0.5px', background: 'var(--gold)' }} />
-            Lüks Ətir Mağazası · Bakı
+            Lüks Ətir Brendi· Bakı
           </div>
 
           <h1 className="animate-fadeUp" style={{ animationDelay: '0.5s', opacity: 0, fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: 'clamp(48px, 7vw, 96px)', fontWeight: 300, lineHeight: 1.0, marginBottom: '32px' }}>

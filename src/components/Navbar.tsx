@@ -32,7 +32,7 @@ export function Navbar() {
     <>
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        padding: scrolled ? '16px 60px' : '28px 60px',
+        padding: scrolled ? '16px 40px' : '24px 40px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         transition: 'all 0.4s',
         background: scrolled || menuOpen ? 'rgba(10,8,6,0.97)' : 'transparent',
