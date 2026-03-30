@@ -22,18 +22,43 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://tir-six.vercel.app'),
+  metadataBase: new URL('https://ravion.az'),
   title: {
-    default: 'Parfumer — Lüks Ətir Mağazası | Bakı',
-    template: '%s | Parfumer',
+    default: 'Ravion — Lüks Ətir Mağazası | Bakı',
+    template: '%s | Ravion',
   },
-  description: 'Bakıda ən lüks qramla ətir mağazası. Tom Ford, Creed, Xerjoff və daha çox premium brendlər. 15ml-dən başlayan sifarişlər.',
-  keywords: ['ətir', 'parfüm', 'lüks ətir', 'Bakı ətir', 'Tom Ford', 'Creed', 'Xerjoff', 'qramla ətir'],
+  description: 'Bakıda lüks ətir mağazası. Tom Ford, Creed, Xerjoff və daha çox premium brendlər. Kuryer ilə çatdırılma.',
+  keywords: [
+    'ətir', 'parfüm', 'lüks ətir', 'Bakı ətir', 'ətir Bakı',
+    'Tom Ford', 'Creed', 'Xerjoff', 'Amouage', 'Parfums de Marly',
+    'kişi ətri', 'qadın ətri', 'unisex ətir', 'hədiyyə ətir',
+    'Ravion', 'ravion.az', 'online ətir mağazası'
+  ],
   openGraph: {
-    title: 'Parfumer — Lüks Ətir Mağazası | Bakı',
-    description: 'Bakıda ən lüks qramla ətir mağazası. 15ml-dən başlayan sifarişlər.',
+    title: 'Ravion — Lüks Ətir Mağazası | Bakı',
+    description: 'Bakıda lüks ətir mağazası. Tom Ford, Creed, Xerjoff. Kuryer ilə çatdırılma.',
     locale: 'az_AZ',
     type: 'website',
+    url: 'https://ravion.az',
+    siteName: 'Ravion',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ravion — Lüks Ətir Mağazası | Bakı',
+    description: 'Bakıda lüks ətir mağazası. Tom Ford, Creed, Xerjoff.',
+  },
+  alternates: {
+    canonical: 'https://ravion.az',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 

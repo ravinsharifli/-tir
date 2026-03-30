@@ -45,7 +45,7 @@ export default function HomeClient() {
               <rect x="64" y="30" width="72" height="34" rx="4" fill="#c9a96e" />
               <rect x="72" y="38" width="56" height="18" rx="2" fill="#b8935a" />
               <rect x="52" y="150" width="96" height="120" rx="2" fill="rgba(201,169,110,0.04)" stroke="rgba(201,169,110,0.25)" strokeWidth="0.5" />
-              <text x="100" y="196" fontFamily="Georgia,serif" fontSize="11" fill="#c9a96e" textAnchor="middle" letterSpacing="4">PARFUMER</text>
+              <text x="100" y="196" fontFamily="Georgia,serif" fontSize="11" fill="#c9a96e" textAnchor="middle" letterSpacing="4">RAVION.az</text>
               <line x1="62" y1="203" x2="138" y2="203" stroke="#c9a96e" strokeWidth="0.3" opacity="0.5" />
               <text x="100" y="220" fontFamily="Georgia,serif" fontSize="7" fill="rgba(201,169,110,0.6)" textAnchor="middle" letterSpacing="2">BAKU</text>
               <text x="100" y="240" fontFamily="Georgia,serif" fontSize="8" fill="rgba(201,169,110,0.35)" textAnchor="middle" fontStyle="italic">Eau de Parfum</text>
@@ -114,7 +114,7 @@ export default function HomeClient() {
               <rect x="54" y="30" width="52" height="44" rx="4" fill="#1a1510" stroke="#c9a96e" strokeWidth="0.5" />
               <rect x="46" y="12" width="68" height="22" rx="4" fill="#c9a96e" />
               <rect x="35" y="120" width="90" height="110" rx="2" fill="rgba(201,169,110,0.04)" stroke="rgba(201,169,110,0.2)" strokeWidth="0.5" />
-              <text x="80" y="168" fontFamily="Georgia,serif" fontSize="9" fill="#c9a96e" textAnchor="middle" letterSpacing="3">PARFUMER</text>
+              <text x="80" y="168" fontFamily="Georgia,serif" fontSize="9" fill="#c9a96e" textAnchor="middle" letterSpacing="3">RAVION.az</text>
               <line x1="42" y1="175" x2="118" y2="175" stroke="#c9a96e" strokeWidth="0.3" opacity="0.4" />
               <text x="80" y="190" fontFamily="Georgia,serif" fontSize="6" fill="rgba(201,169,110,0.5)" textAnchor="middle" letterSpacing="2" fontStyle="italic">Limited Edition</text>
             </svg>
@@ -166,8 +166,8 @@ export default function HomeClient() {
         <div className="steps-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', border: '0.5px solid var(--border)' }}>
           {[
             { num: '01', title: 'Ətrini seç', text: '100-dən çox lüks ətir arasından seçim et. Hər ətir haqqında ətraflı nota məlumatı, geyim tövsiyəsi və müştəri rəyləri mövcuddur.' },
-            { num: '02', title: 'Həcmini müəyyən et', text: 'Minimum 15ml-dən başlayan sifarişlər. Yeni bir ətiri sınamaq üçün 15ml, sevdiyin üçün daha böyük həcm sifariş et.' },
-            { num: '03', title: 'Qapına çatdırılır', text: 'Sifarişin seçdiyin qablaşdırma ilə zərifcə hazırlanır. Bütün Azərbaycana ödənişsiz çatdırılır.' },
+            { num: '02', title: 'Həcmini seç', text: 'Az miqdarda sınamaq istəyirsən? Daha çox almaq istəyirsən? Seçim sənindir — öz zövqünə uyğun həcmi müəyyən et.' },
+            { num: '03', title: 'Qapına çatdırılır', text: 'Sifarişin seçdiyin qablaşdırma ilə zərifcə hazırlanır. Bütün Azərbaycana kuryer ilə çatdırılır.' },
           ].map((step, i) => (
             <div key={i} style={{ padding: '52px 44px', borderRight: i < 2 ? '0.5px solid var(--border)' : 'none' }}>
               <span style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: '80px', fontWeight: 300, color: 'rgba(201,169,110,0.08)', lineHeight: 1, display: 'block', marginBottom: '-16px' }}>{step.num}</span>
@@ -189,14 +189,14 @@ export default function HomeClient() {
         <div style={{ overflow: 'hidden' }}>
           <div className="animate-marquee-slow" style={{ display: 'flex', gap: '24px', width: 'max-content' }}>
             {[
-              { text: 'Creed Aventus-u buradan aldım. Qramla satış fikri əla — əvvəlcə 15ml sınadım, indi 50ml sifariş etdim.', author: 'Elnur M.', city: 'Bakı' },
+              { text: 'Creed Aventus-u buradan aldım. Keyfiyyət əladır, çatdırılma çox sürətli oldu.', author: 'Elnur M.', city: 'Bakı' },
               { text: 'Hədiyyəlik qutu dizaynı inanılmaz gözəldir. Sevgilimin doğum günündə 3 fərqli ətirdən ibarət set göndərdim.', author: 'Aytən H.', city: 'Gəncə' },
               { text: 'Tom Ford Black Orchid-i uzun axtarırdım. Nəhayət Bakıda keyfiyyətli satan yer tapdım.', author: 'Sevinc K.', city: 'Bakı' },
-              { text: 'Xerjoff Naxos — bu ətirin hər qramı sizi başqa dünyaya aparır. Parfumer sayəsində kəşf etdim.', author: 'Rauf Ə.', city: 'Sumqayıt' },
-              { text: 'Creed Aventus-u buradan aldım. Qramla satış fikri əla — əvvəlcə 15ml sınadım, indi 50ml sifariş etdim.', author: 'Elnur M.', city: 'Bakı' },
+              { text: 'Xerjoff Naxos — bu ətirin hər qramı sizi başqa dünyaya aparır. Ravion.az sayəsində kəşf etdim.', author: 'Rauf Ə.', city: 'Sumqayıt' },
+              { text: 'Creed Aventus-u buradan aldım. Keyfiyyət əladır, çatdırılma çox sürətli oldu.', author: 'Elnur M.', city: 'Bakı' },
               { text: 'Hədiyyəlik qutu dizaynı inanılmaz gözəldir. Sevgilimin doğum günündə 3 fərqli ətirdən ibarət set göndərdim.', author: 'Aytən H.', city: 'Gəncə' },
               { text: 'Tom Ford Black Orchid-i uzun axtarırdım. Nəhayət Bakıda keyfiyyətli satan yer tapdım.', author: 'Sevinc K.', city: 'Bakı' },
-              { text: 'Xerjoff Naxos — bu ətirin hər qramı sizi başqa dünyaya aparır. Parfumer sayəsində kəşf etdim.', author: 'Rauf Ə.', city: 'Sumqayıt' },
+              { text: 'Xerjoff Naxos — bu ətirin hər qramı sizi başqa dünyaya aparır. Ravion.az sayəsində kəşf etdim.', author: 'Rauf Ə.', city: 'Sumqayıt' },
             ].map((t, i) => (
               <div key={i} style={{ minWidth: '380px', padding: '40px 44px', border: '0.5px solid var(--border)', background: 'var(--card)', flexShrink: 0 }}>
                 <div style={{ display: 'flex', gap: '3px', marginBottom: '20px' }}>
@@ -232,16 +232,15 @@ export default function HomeClient() {
         </div>
       </section>
 
-      
       {/* FOOTER */}
       <footer style={{ background: 'var(--black)', borderTop: '0.5px solid var(--border)', padding: '80px 60px 40px' }} className="footer-pad">
         <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '60px', marginBottom: '60px' }}>
           <div>
             <div style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontSize: '28px', fontWeight: 300, letterSpacing: '0.1em', marginBottom: '16px' }}>
-              PARFU<span style={{ color: 'var(--gold)' }}>M</span>ER
+              RAVI<span style={{ color: 'var(--gold)' }}>O</span>N
             </div>
             <p style={{ fontSize: '12px', lineHeight: 1.9, color: 'var(--text-muted)', maxWidth: '280px' }}>
-              Bakıda ilk lüks qramla ətir mağazası. Dünyanın ən seçkin evlərinin ətirlərini — sənin qiymətinə. Gəlirimizin 5%-i xeyriyyəyə ayrılır.
+              Bakıda lüks ətir mağazası. Dünyanın ən seçkin evlərinin ətirlərini — sənin qiymətinə. Gəlirimizin 5%-i xeyriyyəyə ayrılır.
             </p>
           </div>
           {[
@@ -266,13 +265,18 @@ export default function HomeClient() {
           ))}
         </div>
         <div style={{ borderTop: '0.5px solid var(--border)', paddingTop: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-          <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>© 2025 Parfumer. Bütün hüquqlar qorunur.</span>
+          <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>© 2025 Ravion.az. Bütün hüquqlar qorunur.</span>
           <div style={{ display: 'flex', gap: '24px' }}>
-            {['Instagram', 'WhatsApp', 'TikTok'].map((s) => (
-              <a key={s} href="#" style={{ fontSize: '10px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.3s' }}
+            {[
+              { label: 'Instagram', href: 'https://instagram.com/ravion.az' },
+              { label: 'TikTok', href: 'https://tiktok.com/@ravion.az' },
+              { label: 'WhatsApp', href: 'https://wa.me/994558603040' },
+            ].map((s) => (
+              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
+                style={{ fontSize: '10px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.3s' }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--gold)')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}>
-                {s}
+                {s.label}
               </a>
             ))}
           </div>
