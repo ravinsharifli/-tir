@@ -131,7 +131,7 @@ a { color: inherit; }
 }
 
 /* Cursor */
-* { cursor: none !important; }
+*:not([data-ui]) { cursor: none !important; }
 
 /* Responsive — Navbar */
 .desktop-nav {

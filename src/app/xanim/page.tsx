@@ -6,17 +6,23 @@ import PerfumeGrid from '@/components/PerfumeGrid'
 
 export const metadata: Metadata = {
   title: 'Xanım Ətrirləri',
-  description: 'Bakıda ən lüks xanım ətrirləri. Zərif, çiçəkli, füsunkar. 15ml-dən başlayan sifarişlər.',
+  description: 'Bakıda ən lüks xanım ətrirləri. Zərif, çiçəkli, füsunkar. Kuryer ilə çatdırılma.',
 }
 
+export const revalidate = 0
+
 export default async function XanimPage() {
-  const perfumes: Perfume[] = await client.fetch(PERFUMES_BY_GENDER_QUERY, { gender: 'xanim' })
+  const perfumes: Perfume[] = await client.fetch(
+    PERFUMES_BY_GENDER_QUERY,
+    { gender: 'xanim' },
+    { cache: 'no-store' }
+  )
   return (
     <PerfumeGrid
       perfumes={perfumes}
       title="Xanım Ətrirləri"
       subtitle="Zərif, çiçəkli, füsunkar"
-      tag="45+ ətir"
+      tag="Xanım"
     />
   )
 }

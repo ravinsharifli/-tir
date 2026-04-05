@@ -6,17 +6,23 @@ import PerfumeGrid from '@/components/PerfumeGrid'
 
 export const metadata: Metadata = {
   title: 'Unisex Ətirlər',
-  description: 'Bakıda ən lüks unisex ətirlər. Cinsiyyətsiz, azad, müasir. 15ml-dən başlayan sifarişlər.',
+  description: 'Bakıda ən lüks unisex ətirlər. Cinsiyyətsiz, azad, müasir. Kuryer ilə çatdırılma.',
 }
 
+export const revalidate = 0
+
 export default async function UnisexPage() {
-  const perfumes: Perfume[] = await client.fetch(PERFUMES_BY_GENDER_QUERY, { gender: 'unisex' })
+  const perfumes: Perfume[] = await client.fetch(
+    PERFUMES_BY_GENDER_QUERY,
+    { gender: 'unisex' },
+    { cache: 'no-store' }
+  )
   return (
     <PerfumeGrid
       perfumes={perfumes}
       title="Unisex Ətirlər"
       subtitle="Cinsiyyətsiz, azad, müasir"
-      tag="30+ ətir"
+      tag="Unisex"
     />
   )
 }
