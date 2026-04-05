@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { client, urlFor } from '@/lib/sanity'
-import { PERFUME_BY_SLUG_QUERY } from '@/lib/queries'
-import { Perfume, PACKAGING_OPTIONS, DELIVERY_OPTIONS } from '@/lib/types'
+import { PERFUME_BY_SLUG_QUERY, PACKAGING_QUERY_ACTIVE, DELIVERY_QUERY } from '@/lib/queries'
+import { Perfume, SanityPackaging, SanityDelivery } from '@/lib/types'
 import { useCartStore } from '@/store/cartStore'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -16,17 +16,26 @@ export default function EtirPage() {
   const slug = params?.slug as string
 
   const [perfume, setPerfume] = useState<Perfume | null>(null)
+  const [packagingOptions, setPackagingOptions] = useState<SanityPackaging[]>([])
+  const [deliveryOptions, setDeliveryOptions] = useState<SanityDelivery[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedMl, setSelectedMl] = useState(30)
-  const [selectedPackaging, setSelectedPackaging] = useState<'standard' | 'premium' | 'luxury'>('standard')
+  const [selectedPackaging, setSelectedPackaging] = useState<SanityPackaging | null>(null)
   const [added, setAdded] = useState(false)
 
   const { addItem } = useCartStore()
 
   useEffect(() => {
     if (!slug) return
-    client.fetch(PERFUME_BY_SLUG_QUERY, { slug }).then((data) => {
-      setPerfume(data)
+    Promise.all([
+      client.fetch(PERFUME_BY_SLUG_QUERY, { slug }),
+      client.fetch(PACKAGING_QUERY_ACTIVE),
+      client.fetch(DELIVERY_QUERY),
+    ]).then(([perfumeData, packagingData, deliveryData]) => {
+      setPerfume(perfumeData)
+      setPackagingOptions(packagingData)
+      setDeliveryOptions(deliveryData)
+      if (packagingData.length > 0) setSelectedPackaging(packagingData[0])
       setLoading(false)
     })
   }, [slug])
@@ -52,8 +61,8 @@ export default function EtirPage() {
     )
   }
 
-  const packaging = PACKAGING_OPTIONS.find((p) => p.id === selectedPackaging)!
-  const totalPrice = (perfume.pricePerMl * selectedMl + packaging.price).toFixed(2)
+  const packagingPrice = selectedPackaging?.price ?? 0
+  const totalPrice = (perfume.pricePerMl * selectedMl + packagingPrice).toFixed(2)
 
   const handleAddToCart = () => {
     addItem({
@@ -62,8 +71,8 @@ export default function EtirPage() {
       brand: perfume.brand,
       ml: selectedMl,
       pricePerMl: perfume.pricePerMl,
-      packaging: selectedPackaging,
-      packagingPrice: packaging.price,
+      packaging: 'standard',
+      packagingPrice: packagingPrice,
     })
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
@@ -76,7 +85,7 @@ export default function EtirPage() {
     <div style={{ minHeight: '100vh', background: 'var(--black)', paddingTop: '100px' }}>
 
       {/* Breadcrumb */}
-      <div style={{ padding: '24px 60px', display: 'flex', alignItems: 'center', gap: '12px', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
+      <div style={{ padding: '24px 60px', display: 'flex', alignItems: 'center', gap: '12px', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }} className="section-pad-inner">
         <Link href="/" style={{ color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.3s' }}
           onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--gold)')}
           onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}>
@@ -122,7 +131,6 @@ export default function EtirPage() {
             </svg>
           )}
 
-          {/* Brend badge */}
           <div style={{ position: 'absolute', top: '32px', left: '32px', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', border: '0.5px solid var(--border)', padding: '8px 16px', background: 'rgba(10,8,6,0.8)', zIndex: 2 }}>
             {perfume.brand}
           </div>
@@ -137,7 +145,6 @@ export default function EtirPage() {
         {/* Sağ — Məlumat */}
         <div style={{ background: 'var(--card)', border: '0.5px solid var(--border)', padding: '60px', display: 'flex', flexDirection: 'column', gap: '32px' }} className="etir-info">
 
-          {/* Ad və brend */}
           <div>
             <div style={{ fontSize: '10px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}>
               <span style={{ display: 'block', width: '24px', height: '0.5px', background: 'var(--gold)' }} />
@@ -204,34 +211,49 @@ export default function EtirPage() {
             </div>
           </div>
 
-          {/* Qablaşdırma seçimi */}
-          <div style={{ borderTop: '0.5px solid var(--border)', paddingTop: '28px' }}>
-            <div style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '16px' }}>
-              Qablaşdırma
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {PACKAGING_OPTIONS.map((pkg) => (
-                <button key={pkg.id} onClick={() => setSelectedPackaging(pkg.id)}
-                  style={{
-                    padding: '14px 20px',
-                    border: `0.5px solid ${selectedPackaging === pkg.id ? 'var(--gold)' : 'var(--border)'}`,
-                    background: selectedPackaging === pkg.id ? 'rgba(201,169,110,0.05)' : 'transparent',
-                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                    cursor: 'none', transition: 'all 0.2s', textAlign: 'left',
-                  }}>
-                  <div>
-                    <div style={{ fontSize: '13px', color: selectedPackaging === pkg.id ? 'var(--cream)' : 'var(--text-mid)', fontFamily: 'var(--font-cormorant), Georgia, serif', marginBottom: '2px' }}>
-                      {pkg.name}
+          {/* Qablaşdırma — Sanity-dən */}
+          {packagingOptions.length > 0 && (
+            <div style={{ borderTop: '0.5px solid var(--border)', paddingTop: '28px' }}>
+              <div style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '16px' }}>
+                Qablaşdırma
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {packagingOptions.map((pkg) => (
+                  <button key={pkg._id} onClick={() => setSelectedPackaging(pkg)}
+                    style={{
+                      padding: '14px 20px',
+                      border: `0.5px solid ${selectedPackaging?._id === pkg._id ? 'var(--gold)' : 'var(--border)'}`,
+                      background: selectedPackaging?._id === pkg._id ? 'rgba(201,169,110,0.05)' : 'transparent',
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                      cursor: 'none', transition: 'all 0.2s', textAlign: 'left',
+                    }}>
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                        <span style={{ fontSize: '13px', color: selectedPackaging?._id === pkg._id ? 'var(--cream)' : 'var(--text-mid)', fontFamily: 'var(--font-cormorant), Georgia, serif' }}>
+                          {pkg.name}
+                        </span>
+                        {pkg.popular && (
+                          <span style={{ fontSize: '8px', letterSpacing: '0.12em', textTransform: 'uppercase', background: 'var(--gold)', color: 'var(--black)', padding: '2px 6px' }}>
+                            Populyar
+                          </span>
+                        )}
+                      </div>
+                      {pkg.items?.length > 0 && (
+                        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                          {pkg.items.map((item) => (
+                            <span key={item} style={{ fontSize: '10px', color: 'var(--text-muted)' }}>· {item}</span>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                    <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{pkg.description}</div>
-                  </div>
-                  <span style={{ fontSize: '14px', color: 'var(--gold)', fontFamily: 'var(--font-cormorant), Georgia, serif', whiteSpace: 'nowrap', marginLeft: '16px' }}>
-                    {pkg.price === 0 ? 'Pulsuz' : `+${pkg.price} ₼`}
-                  </span>
-                </button>
-              ))}
+                    <span style={{ fontSize: '14px', color: 'var(--gold)', fontFamily: 'var(--font-cormorant), Georgia, serif', whiteSpace: 'nowrap', marginLeft: '16px' }}>
+                      {pkg.price === 0 ? 'Pulsuz' : `+${pkg.price} ₼`}
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Qiymət və səbət */}
           <div style={{ borderTop: '0.5px solid var(--border)', paddingTop: '28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
@@ -243,7 +265,7 @@ export default function EtirPage() {
                 {totalPrice} ₼
               </div>
               <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>
-                {selectedMl}ml + {packaging.name}
+                {selectedMl}ml {selectedPackaging ? `+ ${selectedPackaging.name}` : ''}
               </div>
             </div>
 
@@ -261,26 +283,33 @@ export default function EtirPage() {
             </button>
           </div>
 
-          {/* Çatdırılma */}
-          <div style={{ borderTop: '0.5px solid var(--border)', paddingTop: '24px' }}>
-            <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-              {DELIVERY_OPTIONS.map((d) => (
-                <div key={d.id} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--gold-dim)', flexShrink: 0 }} />
-                  <div>
-                    <div style={{ fontSize: '11px', color: 'var(--text-mid)' }}>{d.name}</div>
-                    <div style={{ fontSize: '10px', color: 'var(--text-muted)' }}>{d.days} · {d.price === 0 ? 'Pulsuz' : `${d.price} ₼`}</div>
+          {/* Çatdırılma — Sanity-dən */}
+          {deliveryOptions.length > 0 && (
+            <div style={{ borderTop: '0.5px solid var(--border)', paddingTop: '24px' }}>
+              <div style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '12px' }}>
+                Çatdırılma
+              </div>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+                {deliveryOptions.map((d) => (
+                  <div key={d._id} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--gold-dim)', flexShrink: 0 }} />
+                    <div>
+                      <div style={{ fontSize: '11px', color: 'var(--text-mid)' }}>{d.name}</div>
+                      <div style={{ fontSize: '10px', color: 'var(--text-muted)' }}>
+                        {d.days} · {d.price === 0 ? 'Pulsuz' : `${d.price} ₼`}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 
       {/* Ətraflı təsvir */}
       {perfume.longDescription && (
-        <div style={{ padding: '80px 60px', borderTop: '0.5px solid var(--border)', background: 'var(--deep)' }}>
+        <div style={{ padding: '80px 60px', borderTop: '0.5px solid var(--border)', background: 'var(--deep)' }} className="section-pad">
           <div style={{ maxWidth: '700px' }}>
             <span style={{ fontSize: '10px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--gold)', display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
               <span style={{ display: 'block', width: '24px', height: '0.5px', background: 'var(--gold)' }} />

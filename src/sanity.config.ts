@@ -11,7 +11,12 @@ export default defineConfig({
   title: 'Ravion Admin',
   projectId: 'qarg43e4',
   dataset: 'production',
-  plugins: [structureTool()],
+  plugins: [
+    structureTool({
+      name: 'studio',
+      title: 'Content',
+    }),
+  ],
   schema: {
     types: [perfumeSchema, giftBoxSchema, packagingSchema, campaignSchema, deliverySchema],
   },

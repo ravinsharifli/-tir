@@ -99,3 +99,18 @@ export interface CartItem {
   packagingPrice: number
   quantity: number
 }
+export interface SanityPackaging {
+  _id: string
+  name: string
+  price: number
+  items: string[]
+  popular: boolean
+}
+
+export interface SanityDelivery {
+  _id: string
+  name: string
+  description: string
+  days: string
+  price: number
+}
