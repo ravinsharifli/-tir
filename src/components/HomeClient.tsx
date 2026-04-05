@@ -54,7 +54,7 @@ export default function HomeClient() {
           </div>
         </div>
 
-        <div style={{ position: 'absolute', bottom: '80px', left: '60px', display: 'flex', alignItems: 'center', gap: '12px', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
+        <div style={{ position: 'absolute', bottom: '60px', left: '60px', display: 'flex', alignItems: 'center', gap: '12px', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
           <div style={{ width: '40px', height: '0.5px', background: 'var(--gold-dim)', position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'var(--gold)', animation: 'marquee 2s ease-in-out infinite' }} />
           </div>
