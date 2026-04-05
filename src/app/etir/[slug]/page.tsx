@@ -64,7 +64,6 @@ export default function EtirPage() {
       pricePerMl: perfume.pricePerMl,
       packaging: selectedPackaging,
       packagingPrice: packaging.price,
-      quantity: 1,
     })
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
