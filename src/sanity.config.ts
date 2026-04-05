@@ -5,6 +5,7 @@ import { giftBoxSchema } from '@/sanity/schemas/giftBox'
 import { packagingSchema } from '@/sanity/schemas/packaging'
 import { campaignSchema } from '@/sanity/schemas/campaign'
 import { deliverySchema } from '@/sanity/schemas/delivery'
+import { discountSchema } from '@/sanity/schemas/discount'
 
 export default defineConfig({
   name: 'default',
@@ -18,6 +19,6 @@ export default defineConfig({
     }),
   ],
   schema: {
-    types: [perfumeSchema, giftBoxSchema, packagingSchema, campaignSchema, deliverySchema],
+    types: [perfumeSchema, giftBoxSchema, packagingSchema, campaignSchema, deliverySchema, discountSchema],
   },
 })

@@ -120,3 +120,9 @@ export interface SanityDelivery {
   days: string
   price: number
 }
+export interface SanityDiscount {
+  _id: string
+  name: string
+  minItems: number
+  percent: number
+}

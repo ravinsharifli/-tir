@@ -75,3 +75,8 @@ export const PACKAGING_QUERY_ACTIVE = groq`
     _id, name, price, items, popular
   }
 `
+export const DISCOUNT_QUERY = groq`
+  *[_type == "discount" && active == true] | order(minItems asc) {
+    _id, name, minItems, percent
+  }
+`
