@@ -4,12 +4,10 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { client, urlFor } from '@/lib/sanity'
 import { PERFUME_BY_SLUG_QUERY, PACKAGING_QUERY_ACTIVE, DELIVERY_QUERY } from '@/lib/queries'
-import { Perfume, SanityPackaging, SanityDelivery } from '@/lib/types'
+import { Perfume, PerfumeSize, SanityPackaging, SanityDelivery } from '@/lib/types'
 import { useCartStore } from '@/store/cartStore'
 import Image from 'next/image'
 import Link from 'next/link'
-
-const ML_OPTIONS = [15, 30, 50, 100]
 
 export default function EtirPage() {
   const params = useParams()
@@ -19,7 +17,7 @@ export default function EtirPage() {
   const [packagingOptions, setPackagingOptions] = useState<SanityPackaging[]>([])
   const [deliveryOptions, setDeliveryOptions] = useState<SanityDelivery[]>([])
   const [loading, setLoading] = useState(true)
-  const [selectedMl, setSelectedMl] = useState(30)
+  const [selectedSize, setSelectedSize] = useState<PerfumeSize | null>(null)
   const [selectedPackaging, setSelectedPackaging] = useState<SanityPackaging | null>(null)
   const [added, setAdded] = useState(false)
 
@@ -35,6 +33,7 @@ export default function EtirPage() {
       setPerfume(perfumeData)
       setPackagingOptions(packagingData)
       setDeliveryOptions(deliveryData)
+      if (perfumeData?.sizes?.length > 0) setSelectedSize(perfumeData.sizes[0])
       if (packagingData.length > 0) setSelectedPackaging(packagingData[0])
       setLoading(false)
     })
@@ -62,15 +61,17 @@ export default function EtirPage() {
   }
 
   const packagingPrice = selectedPackaging?.price ?? 0
-  const totalPrice = (perfume.pricePerMl * selectedMl + packagingPrice).toFixed(2)
+  const totalPrice = selectedSize ? (selectedSize.price + packagingPrice).toFixed(2) : '0.00'
+  const currentImage = selectedSize?.image || perfume.mainImage
 
   const handleAddToCart = () => {
+    if (!selectedSize) return
     addItem({
       perfumeId: perfume._id,
       perfumeName: perfume.name,
       brand: perfume.brand,
-      ml: selectedMl,
-      pricePerMl: perfume.pricePerMl,
+      ml: selectedSize.ml,
+      pricePerMl: selectedSize.price / selectedSize.ml,
       packaging: 'standard',
       packagingPrice: packagingPrice,
     })
@@ -79,12 +80,11 @@ export default function EtirPage() {
   }
 
   const genderLabel = perfume.gender === 'kisi' ? 'Kişi' : perfume.gender === 'xanim' ? 'Xanım' : 'Unisex'
-  const genderHref = `/${perfume.gender}`
+  const genderHref = '/' + perfume.gender
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--black)', paddingTop: '100px' }}>
 
-      {/* Breadcrumb */}
       <div style={{ padding: '24px 60px', display: 'flex', alignItems: 'center', gap: '12px', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }} className="section-pad-inner">
         <Link href="/" style={{ color: 'var(--text-muted)', textDecoration: 'none', transition: 'color 0.3s' }}
           onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--gold)')}
@@ -101,19 +101,17 @@ export default function EtirPage() {
         <span style={{ color: 'var(--cream)' }}>{perfume.name}</span>
       </div>
 
-      {/* Main content */}
       <div className="etir-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px', padding: '0 60px 120px' }}>
 
-        {/* Sol — Şəkil */}
         <div style={{ background: 'var(--surface)', border: '0.5px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '600px', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, rgba(201,169,110,0.08) 0%, transparent 70%)' }} />
 
-          {perfume.image ? (
+          {currentImage ? (
             <Image
-              src={urlFor(perfume.image).width(600).height(700).fit('crop').url()}
-              alt={perfume.name}
+              src={urlFor(currentImage).width(600).height(700).fit('crop').url()}
+              alt={perfume.name + ' ' + selectedSize?.ml + 'ml'}
               fill
-              style={{ objectFit: 'cover' }}
+              style={{ objectFit: 'cover', transition: 'opacity 0.3s' }}
               priority
             />
           ) : (
@@ -131,18 +129,21 @@ export default function EtirPage() {
             </svg>
           )}
 
-          <div style={{ position: 'absolute', top: '32px', left: '32px', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', border: '0.5px solid var(--border)', padding: '8px 16px', background: 'rgba(10,8,6,0.8)', zIndex: 2 }}>
+          <div style={{ position: 'absolute', top: '20px', left: '20px', fontSize: '9px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', border: '0.5px solid rgba(201,169,110,0.3)', padding: '5px 12px', background: 'rgba(10,8,6,0.8)', zIndex: 2 }}>
             {perfume.brand}
           </div>
 
-          {!perfume.inStock && (
-            <div style={{ position: 'absolute', top: '32px', right: '32px', fontSize: '9px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-muted)', border: '0.5px solid var(--border)', padding: '8px 16px', background: 'rgba(10,8,6,0.8)', zIndex: 2 }}>
+          <div style={{ position: 'absolute', top: '20px', right: '20px', fontSize: '8px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(201,169,110,0.7)', border: '0.5px solid rgba(201,169,110,0.2)', padding: '4px 10px', background: 'rgba(10,8,6,0.75)', zIndex: 2, fontStyle: 'italic' }}>
+            {genderLabel}
+          </div>
+
+          {selectedSize && !selectedSize.inStock && (
+            <div style={{ position: 'absolute', bottom: '20px', right: '20px', fontSize: '8px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-muted)', border: '0.5px solid var(--border)', padding: '4px 10px', background: 'rgba(10,8,6,0.8)', zIndex: 2 }}>
               Stokda yox
             </div>
           )}
         </div>
 
-        {/* Sağ — Məlumat */}
         <div style={{ background: 'var(--card)', border: '0.5px solid var(--border)', padding: '60px', display: 'flex', flexDirection: 'column', gap: '32px' }} className="etir-info">
 
           <div>
@@ -160,7 +161,6 @@ export default function EtirPage() {
             )}
           </div>
 
-          {/* Notlar */}
           {perfume.notes && (
             <div style={{ borderTop: '0.5px solid var(--border)', paddingTop: '28px' }}>
               <div style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '20px' }}>
@@ -188,30 +188,36 @@ export default function EtirPage() {
             </div>
           )}
 
-          {/* Həcm seçimi */}
-          <div style={{ borderTop: '0.5px solid var(--border)', paddingTop: '28px' }}>
-            <div style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '16px' }}>
-              Həcm Seç
+          {perfume.sizes?.length > 0 && (
+            <div style={{ borderTop: '0.5px solid var(--border)', paddingTop: '28px' }}>
+              <div style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '16px' }}>
+                Ölçü və Qiymət Seç
+              </div>
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                {perfume.sizes.map((size) => (
+                  <button key={size.ml} onClick={() => setSelectedSize(size)}
+                    disabled={!size.inStock}
+                    style={{
+                      padding: '12px 20px',
+                      border: '0.5px solid ' + (selectedSize?.ml === size.ml ? 'var(--gold)' : 'var(--border)'),
+                      background: selectedSize?.ml === size.ml ? 'rgba(201,169,110,0.1)' : 'transparent',
+                      color: !size.inStock ? 'var(--text-muted)' : selectedSize?.ml === size.ml ? 'var(--gold)' : 'var(--text-mid)',
+                      cursor: size.inStock ? 'none' : 'not-allowed',
+                      transition: 'all 0.2s',
+                      fontFamily: 'var(--font-montserrat), sans-serif',
+                      textAlign: 'center',
+                      opacity: size.inStock ? 1 : 0.5,
+                    }}>
+                    <div style={{ fontSize: '12px', letterSpacing: '0.1em' }}>{size.ml}ml</div>
+                    <div style={{ fontSize: '14px', fontFamily: 'var(--font-cormorant), Georgia, serif', color: 'var(--gold)', marginTop: '2px' }}>
+                      {size.price} ₼
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-              {ML_OPTIONS.map((ml) => (
-                <button key={ml} onClick={() => setSelectedMl(ml)}
-                  style={{
-                    padding: '10px 20px',
-                    border: `0.5px solid ${selectedMl === ml ? 'var(--gold)' : 'var(--border)'}`,
-                    background: selectedMl === ml ? 'rgba(201,169,110,0.1)' : 'transparent',
-                    color: selectedMl === ml ? 'var(--gold)' : 'var(--text-muted)',
-                    fontSize: '12px', letterSpacing: '0.1em',
-                    cursor: 'none', transition: 'all 0.2s',
-                    fontFamily: 'var(--font-montserrat), sans-serif',
-                  }}>
-                  {ml}ml
-                </button>
-              ))}
-            </div>
-          </div>
+          )}
 
-          {/* Qablaşdırma — Sanity-dən */}
           {packagingOptions.length > 0 && (
             <div style={{ borderTop: '0.5px solid var(--border)', paddingTop: '28px' }}>
               <div style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '16px' }}>
@@ -222,7 +228,7 @@ export default function EtirPage() {
                   <button key={pkg._id} onClick={() => setSelectedPackaging(pkg)}
                     style={{
                       padding: '14px 20px',
-                      border: `0.5px solid ${selectedPackaging?._id === pkg._id ? 'var(--gold)' : 'var(--border)'}`,
+                      border: '0.5px solid ' + (selectedPackaging?._id === pkg._id ? 'var(--gold)' : 'var(--border)'),
                       background: selectedPackaging?._id === pkg._id ? 'rgba(201,169,110,0.05)' : 'transparent',
                       display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                       cursor: 'none', transition: 'all 0.2s', textAlign: 'left',
@@ -247,7 +253,7 @@ export default function EtirPage() {
                       )}
                     </div>
                     <span style={{ fontSize: '14px', color: 'var(--gold)', fontFamily: 'var(--font-cormorant), Georgia, serif', whiteSpace: 'nowrap', marginLeft: '16px' }}>
-                      {pkg.price === 0 ? 'Pulsuz' : `+${pkg.price} ₼`}
+                      {pkg.price === 0 ? 'Pulsuz' : '+' + pkg.price + ' ₼'}
                     </span>
                   </button>
                 ))}
@@ -255,7 +261,6 @@ export default function EtirPage() {
             </div>
           )}
 
-          {/* Qiymət və səbət */}
           <div style={{ borderTop: '0.5px solid var(--border)', paddingTop: '28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
             <div>
               <div style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '4px' }}>
@@ -265,25 +270,24 @@ export default function EtirPage() {
                 {totalPrice} ₼
               </div>
               <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>
-                {selectedMl}ml {selectedPackaging ? `+ ${selectedPackaging.name}` : ''}
+                {selectedSize?.ml}ml {selectedPackaging ? '+ ' + selectedPackaging.name : ''}
               </div>
             </div>
 
             <button
               onClick={handleAddToCart}
-              disabled={!perfume.inStock}
+              disabled={!selectedSize?.inStock}
               className="btn-gold"
               style={{
-                opacity: !perfume.inStock ? 0.4 : 1,
+                opacity: !selectedSize?.inStock ? 0.4 : 1,
                 minWidth: '180px', justifyContent: 'center',
                 background: added ? 'var(--cream)' : undefined,
                 transition: 'all 0.3s',
               }}>
-              {added ? '✓ Əlavə edildi' : perfume.inStock ? 'Səbətə Əlavə Et' : 'Stokda Yox'}
+              {added ? '✓ Əlavə edildi' : selectedSize?.inStock ? 'Səbətə Əlavə Et' : 'Stokda Yox'}
             </button>
           </div>
 
-          {/* Çatdırılma — Sanity-dən */}
           {deliveryOptions.length > 0 && (
             <div style={{ borderTop: '0.5px solid var(--border)', paddingTop: '24px' }}>
               <div style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '12px' }}>
@@ -296,7 +300,7 @@ export default function EtirPage() {
                     <div>
                       <div style={{ fontSize: '11px', color: 'var(--text-mid)' }}>{d.name}</div>
                       <div style={{ fontSize: '10px', color: 'var(--text-muted)' }}>
-                        {d.days} · {d.price === 0 ? 'Pulsuz' : `${d.price} ₼`}
+                        {d.days} · {d.price === 0 ? 'Pulsuz' : d.price + ' ₼'}
                       </div>
                     </div>
                   </div>
@@ -307,7 +311,6 @@ export default function EtirPage() {
         </div>
       </div>
 
-      {/* Ətraflı təsvir */}
       {perfume.longDescription && (
         <div style={{ padding: '80px 60px', borderTop: '0.5px solid var(--border)', background: 'var(--deep)' }} className="section-pad">
           <div style={{ maxWidth: '700px' }}>
