@@ -2,38 +2,31 @@
 import { useEffect, useRef, useState } from 'react'
 
 export function Cursor() {
-  const cursorRef = useRef<HTMLDivElement>(null)
-  const [label, setLabel] = useState('')
+  const dotRef = useRef<HTMLDivElement>(null)
+  const ringRef = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
+  const [hovered, setHovered] = useState(false)
 
   useEffect(() => {
-    const cursor = cursorRef.current
-    if (!cursor) return
+    const dot = dotRef.current
+    const ring = ringRef.current
+    if (!dot || !ring) return
 
     const onMove = (e: MouseEvent) => {
-      cursor.style.left = e.clientX + 'px'
-      cursor.style.top = e.clientY + 'px'
+      dot.style.left = e.clientX + 'px'
+      dot.style.top = e.clientY + 'px'
+      setTimeout(() => {
+        ring.style.left = e.clientX + 'px'
+        ring.style.top = e.clientY + 'px'
+      }, 80)
       setVisible(true)
     }
 
     const onLeave = () => setVisible(false)
     const onEnter = () => setVisible(true)
 
-    const handleEnter = (el: Element) => {
-      const tag = el.tagName.toLowerCase()
-      const classList = el.className?.toString() || ''
-      if (classList.includes('btn-gold')) {
-        setLabel('AL')
-      } else if (tag === 'a') {
-        setLabel('BAX')
-      } else if (tag === 'button') {
-        setLabel('OK')
-      } else {
-        setLabel('')
-      }
-    }
-
-    const handleLeave = () => setLabel('')
+    const grow = () => setHovered(true)
+    const shrink = () => setHovered(false)
 
     document.addEventListener('mousemove', onMove)
     document.addEventListener('mouseleave', onLeave)
@@ -41,8 +34,8 @@ export function Cursor() {
 
     const attachListeners = () => {
       document.querySelectorAll('a, button').forEach((el) => {
-        el.addEventListener('mouseenter', () => handleEnter(el))
-        el.addEventListener('mouseleave', handleLeave)
+        el.addEventListener('mouseenter', grow)
+        el.addEventListener('mouseleave', shrink)
       })
     }
 
@@ -60,66 +53,37 @@ export function Cursor() {
   }, [])
 
   return (
-    <div
-      ref={cursorRef}
-      style={{
-        position: 'fixed',
-        pointerEvents: 'none',
-        zIndex: 9999,
-        transform: 'translate(-50%, -50%)',
-        transition: 'opacity 0.3s',
-        opacity: visible ? 1 : 0,
-      }}
-    >
-      {label ? (
-        // Mətn modu — hover-da
-        <div style={{
+    <>
+      <div
+        ref={dotRef}
+        style={{
+          position: 'fixed',
+          pointerEvents: 'none',
+          zIndex: 9999,
+          transform: 'translate(-50%, -50%)',
+          width: hovered ? '12px' : '6px',
+          height: hovered ? '12px' : '6px',
+          borderRadius: '50%',
           background: 'var(--gold)',
-          color: 'var(--black)',
-          fontSize: '9px',
-          fontWeight: 500,
-          letterSpacing: '0.25em',
-          padding: '8px 14px',
-          fontFamily: 'var(--font-montserrat), sans-serif',
-          textTransform: 'uppercase',
-          whiteSpace: 'nowrap',
-          transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-        }}>
-          {label}
-        </div>
-      ) : (
-        // Normal mod — qızıl xaç
-        <div style={{ position: 'relative', width: '20px', height: '20px' }}>
-          <div style={{
-            position: 'absolute',
-            top: '50%',
-            left: 0,
-            right: 0,
-            height: '0.5px',
-            background: 'var(--gold)',
-            transform: 'translateY(-50%)',
-          }} />
-          <div style={{
-            position: 'absolute',
-            left: '50%',
-            top: 0,
-            bottom: 0,
-            width: '0.5px',
-            background: 'var(--gold)',
-            transform: 'translateX(-50%)',
-          }} />
-          <div style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '3px',
-            height: '3px',
-            borderRadius: '50%',
-            background: 'var(--gold)',
-          }} />
-        </div>
-      )}
-    </div>
+          opacity: visible ? 1 : 0,
+          transition: 'width 0.2s, height 0.2s, opacity 0.3s',
+        }}
+      />
+      <div
+        ref={ringRef}
+        style={{
+          position: 'fixed',
+          pointerEvents: 'none',
+          zIndex: 9998,
+          transform: 'translate(-50%, -50%)',
+          width: hovered ? '48px' : '32px',
+          height: hovered ? '48px' : '32px',
+          borderRadius: '50%',
+          border: '0.5px solid rgba(201,169,110,0.6)',
+          opacity: visible ? 1 : 0,
+          transition: 'width 0.15s, height 0.15s, opacity 0.3s',
+        }}
+      />
+    </>
   )
 }

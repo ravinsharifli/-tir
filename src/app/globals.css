@@ -27,11 +27,14 @@ body {
   font-family: var(--font-montserrat), sans-serif;
   background: var(--black);
   color: var(--cream);
-  cursor: none;
   overflow-x: hidden;
 }
 
 a { color: inherit; }
+
+/* Cursor — saytda gizli, Studioda normal */
+body:not(:has([data-sanity-studio])) * { cursor: none !important; }
+[data-sanity-studio] * { cursor: auto !important; }
 
 /* Buttons */
 .btn-gold {
@@ -130,18 +133,15 @@ a { color: inherit; }
   animation: marqueeScroll 50s linear infinite;
 }
 
-/* Cursor */
-*:not([data-ui]) { cursor: none !important; }
-
-/* Responsive — Navbar */
+/* Navbar */
 .desktop-nav {
   display: flex !important;
 }
-
 .mobile-menu-btn {
   display: none !important;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .desktop-nav {
     display: none !important;
@@ -149,31 +149,16 @@ a { color: inherit; }
   .mobile-menu-btn {
     display: flex !important;
   }
-
-
-  /* Hero mobilə uyğun */
-  section {
-    padding-left: 24px !important;
-    padding-right: 24px !important;
-  }
-
-  /* Kateqoriya grid mobilə uyğun */
-  div[style*="gridTemplateColumns: 'repeat(4"] {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-}
-/* Hero bottle — mobilə gizlən */
-@media (max-width: 768px) {
   .hero-bottle { display: none !important; }
   .hero-section { padding: 0 24px !important; }
   .section-pad { padding-left: 24px !important; padding-right: 24px !important; }
+  .section-pad-inner { padding-left: 24px !important; padding-right: 24px !important; }
   .cat-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .pkg-grid { grid-template-columns: 1fr !important; }
   .pkg-text { padding: 40px 24px !important; }
   .steps-grid { grid-template-columns: 1fr !important; }
   .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
   .footer-pad { padding: 60px 24px 40px !important; }
-  .section-pad-inner { padding-left: 24px !important; padding-right: 24px !important; }
   .etir-grid { grid-template-columns: 1fr !important; }
   .etir-info { padding: 40px 24px !important; }
 }
