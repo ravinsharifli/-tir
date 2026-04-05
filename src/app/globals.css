@@ -174,4 +174,6 @@ a { color: inherit; }
   .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
   .footer-pad { padding: 60px 24px 40px !important; }
   .section-pad-inner { padding-left: 24px !important; padding-right: 24px !important; }
+  .etir-grid { grid-template-columns: 1fr !important; }
+  .etir-info { padding: 40px 24px !important; }
 }

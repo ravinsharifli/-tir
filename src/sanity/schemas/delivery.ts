@@ -1,33 +1,32 @@
 import { defineField, defineType } from 'sanity'
 
-export const packagingSchema = defineType({
-  name: 'packaging',
-  title: 'Qablaşdırma Seçimləri',
+export const deliverySchema = defineType({
+  name: 'delivery',
+  title: 'Çatdırılma Seçimləri',
   type: 'document',
   fields: [
     defineField({
       name: 'name',
-      title: 'Ad (məs: Standart, Premium, Luxury)',
+      title: 'Ad (məs: Standart, Sürətli)',
+      type: 'string',
+      validation: (R) => R.required(),
+    }),
+    defineField({
+      name: 'description',
+      title: 'Açıqlama (məs: Bütün Azərbaycana)',
+      type: 'string',
+    }),
+    defineField({
+      name: 'days',
+      title: 'Müddət (məs: 1-3 iş günü)',
       type: 'string',
       validation: (R) => R.required(),
     }),
     defineField({
       name: 'price',
-      title: 'Qiymət (₼) — 0 yazsan "Pulsuz" görünür',
+      title: 'Qiymət (₼) — 0 yazsan "Pulsuz"',
       type: 'number',
       validation: (R) => R.required().min(0),
-    }),
-    defineField({
-      name: 'items',
-      title: 'Daxilindəkilər (hər sətir ayrı)',
-      type: 'array',
-      of: [{ type: 'string' }],
-    }),
-    defineField({
-      name: 'popular',
-      title: 'Populyar işarəsi göstərilsin?',
-      type: 'boolean',
-      initialValue: false,
     }),
     defineField({
       name: 'active',
@@ -37,7 +36,7 @@ export const packagingSchema = defineType({
     }),
     defineField({
       name: 'order',
-      title: 'Sıra nömrəsi (1, 2, 3...)',
+      title: 'Sıra nömrəsi',
       type: 'number',
       initialValue: 1,
     }),

@@ -43,3 +43,22 @@ export const PACKAGING_QUERY = groq`
     _id, tier, price, items, popular
   }
 `
+export const ACTIVE_CAMPAIGNS_QUERY = groq`
+  *[_type == "campaign" && active == true] | order(_createdAt desc) {
+    _id, title, subtitle, description,
+    type, buttonText, buttonLink,
+    discountCode, discountPercent,
+    color, startDate, endDate
+  }
+`
+
+export const DELIVERY_QUERY = groq`
+  *[_type == "delivery" && active == true] | order(order asc) {
+    _id, name, description, days, price
+  }
+`
+export const PACKAGING_QUERY_ACTIVE = groq`
+  *[_type == "packaging" && active == true] | order(order asc) {
+    _id, name, price, items, popular
+  }
+`
