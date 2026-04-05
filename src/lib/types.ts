@@ -5,6 +5,13 @@ export interface SanityImage {
   asset: { _ref: string; _type: 'reference' }
 }
 
+export interface PerfumeSize {
+  ml: number
+  price: number
+  image?: SanityImage
+  inStock: boolean
+}
+
 export interface Perfume {
   _id: string
   name: string
@@ -14,11 +21,10 @@ export interface Perfume {
   description: string
   longDescription?: string
   notes: { top: string[]; middle: string[]; base: string[] }
-  pricePerMl: number
+  mainImage: SanityImage
+  sizes: PerfumeSize[]
   inStock: boolean
   featured: boolean
-  image: SanityImage
-  gallery?: SanityImage[]
 }
 
 export interface GiftBox {

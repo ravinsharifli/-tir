@@ -60,14 +60,64 @@ export const perfumeSchema = defineType({
       ],
     }),
     defineField({
-      name: 'pricePerMl',
-      title: 'Qiymət (1ml)',
-      type: 'number',
-      validation: (R) => R.required().min(0),
+      name: 'mainImage',
+      title: 'Əsas şəkil (kateqoriya səhifəsində görünür)',
+      type: 'image',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'sizes',
+      title: 'Ölçülər və Qiymətlər',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          title: 'Ölçü',
+          fields: [
+            {
+              name: 'ml',
+              title: 'Həcm (ml)',
+              type: 'number',
+              validation: (R) => R.required(),
+            },
+            {
+              name: 'price',
+              title: 'Qiymət (₼)',
+              type: 'number',
+              validation: (R) => R.required().min(0),
+            },
+            {
+              name: 'image',
+              title: 'Bu ölçünün şəkli',
+              type: 'image',
+              options: { hotspot: true },
+            },
+            {
+              name: 'inStock',
+              title: 'Stokda var?',
+              type: 'boolean',
+              initialValue: true,
+            },
+          ],
+          preview: {
+            select: {
+              ml: 'ml',
+              price: 'price',
+            },
+            prepare(selection) {
+  const ml = selection.ml
+  const price = selection.price
+  return {
+    title: `${ml}ml — ${price} ₼`,
+  }
+},
+          },
+        },
+      ],
     }),
     defineField({
       name: 'inStock',
-      title: 'Stokda var?',
+      title: 'Ümumi stok (aktiv?)',
       type: 'boolean',
       initialValue: true,
     }),
@@ -76,18 +126,6 @@ export const perfumeSchema = defineType({
       title: 'Öne çıxarılsın?',
       type: 'boolean',
       initialValue: false,
-    }),
-    defineField({
-      name: 'image',
-      title: 'Əsas şəkil',
-      type: 'image',
-      options: { hotspot: true },
-    }),
-    defineField({
-      name: 'gallery',
-      title: 'Qalereya',
-      type: 'array',
-      of: [{ type: 'image', options: { hotspot: true } }],
     }),
   ],
 })
