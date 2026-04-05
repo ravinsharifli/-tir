@@ -26,7 +26,7 @@ export default function HomeClient() {
           </p>
 
           <div className="animate-fadeUp" style={{ animationDelay: '0.9s', opacity: 0, display: 'flex', gap: '28px', alignItems: 'center', flexWrap: 'wrap' }}>
-            <Link href="/kisi" className="btn-gold">Kolleksiyaya Bax</Link>
+            <Link href="/kolleksiya" className="btn-gold">Kolleksiyaya Bax</Link>
             <Link href="/haqqimizda" className="btn-ghost">
               Haqqımızda
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
@@ -45,7 +45,7 @@ export default function HomeClient() {
               <rect x="64" y="30" width="72" height="34" rx="4" fill="#c9a96e" />
               <rect x="72" y="38" width="56" height="18" rx="2" fill="#b8935a" />
               <rect x="52" y="150" width="96" height="120" rx="2" fill="rgba(201,169,110,0.04)" stroke="rgba(201,169,110,0.25)" strokeWidth="0.5" />
-              <text x="100" y="196" fontFamily="Georgia,serif" fontSize="11" fill="#c9a96e" textAnchor="middle" letterSpacing="4">RAVION.az</text>
+              <text x="100" y="196" fontFamily="Georgia,serif" fontSize="11" fill="#c9a96e" textAnchor="middle" letterSpacing="4">RAVION</text>
               <line x1="62" y1="203" x2="138" y2="203" stroke="#c9a96e" strokeWidth="0.3" opacity="0.5" />
               <text x="100" y="220" fontFamily="Georgia,serif" fontSize="7" fill="rgba(201,169,110,0.6)" textAnchor="middle" letterSpacing="2">BAKU</text>
               <text x="100" y="240" fontFamily="Georgia,serif" fontSize="8" fill="rgba(201,169,110,0.35)" textAnchor="middle" fontStyle="italic">Eau de Parfum</text>
@@ -54,7 +54,7 @@ export default function HomeClient() {
           </div>
         </div>
 
-        <div style={{ position: 'absolute', bottom: '40px', left: '60px', display: 'flex', alignItems: 'center', gap: '12px', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
+        <div style={{ position: 'absolute', bottom: '80px', left: '60px', display: 'flex', alignItems: 'center', gap: '12px', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
           <div style={{ width: '40px', height: '0.5px', background: 'var(--gold-dim)', position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'var(--gold)', animation: 'marquee 2s ease-in-out infinite' }} />
           </div>
@@ -114,7 +114,7 @@ export default function HomeClient() {
               <rect x="54" y="30" width="52" height="44" rx="4" fill="#1a1510" stroke="#c9a96e" strokeWidth="0.5" />
               <rect x="46" y="12" width="68" height="22" rx="4" fill="#c9a96e" />
               <rect x="35" y="120" width="90" height="110" rx="2" fill="rgba(201,169,110,0.04)" stroke="rgba(201,169,110,0.2)" strokeWidth="0.5" />
-              <text x="80" y="168" fontFamily="Georgia,serif" fontSize="9" fill="#c9a96e" textAnchor="middle" letterSpacing="3">RAVION.az</text>
+              <text x="80" y="168" fontFamily="Georgia,serif" fontSize="9" fill="#c9a96e" textAnchor="middle" letterSpacing="3">RAVION</text>
               <line x1="42" y1="175" x2="118" y2="175" stroke="#c9a96e" strokeWidth="0.3" opacity="0.4" />
               <text x="80" y="190" fontFamily="Georgia,serif" fontSize="6" fill="rgba(201,169,110,0.5)" textAnchor="middle" letterSpacing="2" fontStyle="italic">Limited Edition</text>
             </svg>
