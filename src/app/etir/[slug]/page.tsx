@@ -1,18 +1,18 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useParams, useRouter } from 'next/navigation'
-import { client } from '@/lib/sanity'
+import { useParams } from 'next/navigation'
+import { client, urlFor } from '@/lib/sanity'
 import { PERFUME_BY_SLUG_QUERY } from '@/lib/queries'
 import { Perfume, PACKAGING_OPTIONS, DELIVERY_OPTIONS } from '@/lib/types'
 import { useCartStore } from '@/store/cartStore'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const ML_OPTIONS = [15, 30, 50, 100]
 
 export default function EtirPage() {
   const params = useParams()
-  const router = useRouter()
   const slug = params?.slug as string
 
   const [perfume, setPerfume] = useState<Perfume | null>(null)
@@ -98,26 +98,37 @@ export default function EtirPage() {
         {/* Sol — Şəkil */}
         <div style={{ background: 'var(--surface)', border: '0.5px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '600px', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, rgba(201,169,110,0.08) 0%, transparent 70%)' }} />
-          <svg className="animate-float" width="200" height="340" viewBox="0 0 200 340" fill="none">
-            <rect x="40" y="100" width="120" height="215" rx="8" fill="#1a1510" stroke="#c9a96e" strokeWidth="0.5" />
-            <rect x="50" y="110" width="28" height="195" rx="4" fill="white" opacity="0.03" />
-            <rect x="72" y="60" width="56" height="44" rx="4" fill="#1a1510" stroke="#c9a96e" strokeWidth="0.5" />
-            <rect x="64" y="30" width="72" height="34" rx="4" fill="#c9a96e" />
-            <rect x="72" y="38" width="56" height="18" rx="2" fill="#b8935a" />
-            <rect x="52" y="150" width="96" height="120" rx="2" fill="rgba(201,169,110,0.04)" stroke="rgba(201,169,110,0.25)" strokeWidth="0.5" />
-            <text x="100" y="196" fontFamily="Georgia,serif" fontSize="11" fill="#c9a96e" textAnchor="middle" letterSpacing="4">RAVION</text>
-            <line x1="62" y1="203" x2="138" y2="203" stroke="#c9a96e" strokeWidth="0.3" opacity="0.5" />
-            <text x="100" y="220" fontFamily="Georgia,serif" fontSize="7" fill="rgba(201,169,110,0.6)" textAnchor="middle" letterSpacing="2">BAKU</text>
-            <text x="100" y="240" fontFamily="Georgia,serif" fontSize="8" fill="rgba(201,169,110,0.35)" textAnchor="middle" fontStyle="italic">Eau de Parfum</text>
-          </svg>
+
+          {perfume.image ? (
+            <Image
+              src={urlFor(perfume.image).width(600).height(700).fit('crop').url()}
+              alt={perfume.name}
+              fill
+              style={{ objectFit: 'cover' }}
+              priority
+            />
+          ) : (
+            <svg className="animate-float" width="200" height="340" viewBox="0 0 200 340" fill="none">
+              <rect x="40" y="100" width="120" height="215" rx="8" fill="#1a1510" stroke="#c9a96e" strokeWidth="0.5" />
+              <rect x="50" y="110" width="28" height="195" rx="4" fill="white" opacity="0.03" />
+              <rect x="72" y="60" width="56" height="44" rx="4" fill="#1a1510" stroke="#c9a96e" strokeWidth="0.5" />
+              <rect x="64" y="30" width="72" height="34" rx="4" fill="#c9a96e" />
+              <rect x="72" y="38" width="56" height="18" rx="2" fill="#b8935a" />
+              <rect x="52" y="150" width="96" height="120" rx="2" fill="rgba(201,169,110,0.04)" stroke="rgba(201,169,110,0.25)" strokeWidth="0.5" />
+              <text x="100" y="196" fontFamily="Georgia,serif" fontSize="11" fill="#c9a96e" textAnchor="middle" letterSpacing="4">RAVION</text>
+              <line x1="62" y1="203" x2="138" y2="203" stroke="#c9a96e" strokeWidth="0.3" opacity="0.5" />
+              <text x="100" y="220" fontFamily="Georgia,serif" fontSize="7" fill="rgba(201,169,110,0.6)" textAnchor="middle" letterSpacing="2">BAKU</text>
+              <text x="100" y="240" fontFamily="Georgia,serif" fontSize="8" fill="rgba(201,169,110,0.35)" textAnchor="middle" fontStyle="italic">Eau de Parfum</text>
+            </svg>
+          )}
 
           {/* Brend badge */}
-          <div style={{ position: 'absolute', top: '32px', left: '32px', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', border: '0.5px solid var(--border)', padding: '8px 16px', background: 'rgba(10,8,6,0.8)' }}>
+          <div style={{ position: 'absolute', top: '32px', left: '32px', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', border: '0.5px solid var(--border)', padding: '8px 16px', background: 'rgba(10,8,6,0.8)', zIndex: 2 }}>
             {perfume.brand}
           </div>
 
           {!perfume.inStock && (
-            <div style={{ position: 'absolute', top: '32px', right: '32px', fontSize: '9px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-muted)', border: '0.5px solid var(--border)', padding: '8px 16px', background: 'rgba(10,8,6,0.8)' }}>
+            <div style={{ position: 'absolute', top: '32px', right: '32px', fontSize: '9px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-muted)', border: '0.5px solid var(--border)', padding: '8px 16px', background: 'rgba(10,8,6,0.8)', zIndex: 2 }}>
               Stokda yox
             </div>
           )}
